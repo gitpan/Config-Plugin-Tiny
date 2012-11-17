@@ -12,15 +12,14 @@ use vars qw(@EXPORT @ISA);
 @EXPORT = ('config_tiny');
 @ISA    = ('Exporter');
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 # --------------------------------------------------
 
 sub config_tiny
 {
 	my($self, $file_name) = @_;
-	$file_name ||= '';
-
+	$file_name  ||= '';
 	my($config) = Config::Tiny -> read($file_name);
 
 	croak 'Error: ' . Config::Tiny -> errstr . "\n" if (Config::Tiny -> errstr);
@@ -48,12 +47,14 @@ Config::Plugin::Tiny - A plugin which uses Config::Tiny
 
 	use Config::Plugin::Tiny; # For config_tiny().
 
+	use File::Spec;
+
 	# ------------------------------------------------
 
 	sub marine
 	{
 		my($self)   = @_;
-		my($config) = $self -> config_tiny('/some/dir/config.tiny.ini');
+		my($config) = $self -> config_tiny(File::Spec -> catfile('some', 'dir', 'config.tiny.ini') );
 
 	} # End of marine.
 
@@ -147,10 +148,6 @@ L<CGI::Application>
 The following are all part of this set of distros:
 
 L<CGI::Snapp> - A almost back-compat fork of CGI::Application
-
-L<CGI::Snapp::Plugin::Forward> - A plugin for CGI::Snapp to switch cleanly to another run mode within the same app
-
-L<CGI::Snapp::Plugin::Redirect> - A plugin for CGI::Snapp to simplify using HTTP redirects
 
 L<CGI::Snapp::Demo::One> - A template-free demo of CGI::Snapp using just 1 run mode
 

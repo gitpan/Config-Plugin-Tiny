@@ -5,7 +5,9 @@ use warnings;
 
 use Config::Plugin::Tiny;
 
-our $VERSION = '1.00';
+use File::Spec;
+
+our $VERSION = '1.01';
 
 # ------------------------------------------------
 
@@ -13,7 +15,7 @@ sub marine
 {
 	my($self) = @_;
 
-	return $self -> config_tiny('t/config.tiny.ini');
+	return $self -> config_tiny(File::Spec -> catfile('t', 'config.tiny.ini') );
 
 } # End of marine.
 
